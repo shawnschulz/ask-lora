@@ -1,8 +1,6 @@
 from optparse import OptionParser
 import sys
-
-from llama_cpp import Llama
-
+from transformers import LlamaForCausalLM, LlamaTokenizer
 
 
 
@@ -10,7 +8,7 @@ from llama_cpp import Llama
 memory_dir = "/home/shawn/datasets/lora_memory/"
 from_online = False
 save_model = False
-path_to_model= "/home/shawn/Programming/ai_stuff/llama.cpp/models/30B/ggml-model-q4_0.bin" 
+path_to_model= "/home/shawn/datasets/LLMs/llama_7b" 
 
 #flags
 parser = OptionParser()
@@ -45,8 +43,8 @@ def ask_lora(prompt, memory_path):
         #save additional context
         f.write(bytes(new_context, 'utf-8'))
         #save the model again (this could either be extremely important or useless idk lol)
-    #f2 = open(memory_dir + 'dataset.json', 'r+b')
-    #f2.write(bytes(str(output), 'utf-8'))
+    f2 = open(memory_dir + 'dataset.json', 'r+b')
+    f2.write(bytes(str(output), 'utf-8'))
     print(output) 
     return(output)
 
